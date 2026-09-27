@@ -269,3 +269,23 @@ section h2 {
     flex-wrap: wrap;
   }
 }
+.project-figure {
+  margin: 0 0 48px;
+}
+
+.project-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+.project-figure figcaption {
+  margin-top: 12px;
+  color: var(--slate);
+  font-size: 0.95rem;
+}
+
+.project-image-final {
+  border: 1px solid var(--accent);
+}
