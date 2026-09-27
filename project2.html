@@ -24,13 +24,15 @@
 
     <main>
 
-      <!-- ============ FINAL IMAGE ============ -->
+      <!-- ============ FINAL SLIDE ============ -->
       <section class="project-figure-section" aria-labelledby="final-heading">
         <h2 id="final-heading">Final piece</h2>
         <figure class="project-figure">
-          <img class="project-image project-image-final" src="How%20do%20we%20value%20a%20dying%20man_.png" alt="How do we value a dying man? — final piece" />
-          <!-- EDIT: I haven't seen this image, so this caption is based on the title alone — refine it once you're looking at it -->
-          <figcaption><strong>How do we value a dying man?</strong> — the companion visual framing the question this project sets out to answer: what a life is worth once its ending is certain.</figcaption>
+          <div class="slide-frame">
+            <iframe id="slide-embed" title="How do we value a dying man? — final slide" allowfullscreen></iframe>
+          </div>
+          <!-- EDIT: I haven't seen this slide, so this caption is based on the title alone -->
+          <figcaption><strong>How do we value a dying man?</strong> — the companion visual framing the question this project sets out to answer: what a life is worth once its ending is certain. <a id="slide-download" href="#">Download the slide</a>.</figcaption>
         </figure>
       </section>
 
@@ -60,6 +62,16 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/page-flip/dist/js/page-flip.browser.min.js"></script>
+  <script>
+    // EDIT: must match the exact filename of your .pptx in the repo
+    var SLIDE_FILE = "How%20do%20we%20value%20a%20dying%20man_.pptx";
+    (function () {
+      var abs = new URL(SLIDE_FILE, window.location.href).href;
+      document.getElementById('slide-embed').src =
+        "https://view.officeapps.live.com/op/embed.aspx?src=" + encodeURIComponent(abs);
+      document.getElementById('slide-download').href = SLIDE_FILE;
+    })();
+  </script>
   <script>
     (function () {
       var PDF_URL = "What%20is%20the%20value%20of%20life_%20(1).pdf";
