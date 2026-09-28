@@ -89,19 +89,24 @@
           var pdf = await pdfjsLib.getDocument(PDF_URL).promise;
           var images = [];
           var baseWidth = 500, baseHeight = 650;
+          // Render sharper than the display size so text stays crisp on retina screens and when zoomed
+          var dpr = window.devicePixelRatio || 1;
+          var renderScale = dpr >= 2 ? 3 : 2.25;
 
           for (var i = 1; i <= pdf.numPages; i++) {
             var page = await pdf.getPage(i);
-            var viewport = page.getViewport({ scale: 1.6 });
+            var viewport = page.getViewport({ scale: renderScale });
             var canvas = document.createElement('canvas');
             canvas.width = viewport.width;
             canvas.height = viewport.height;
             var ctx = canvas.getContext('2d');
             await page.render({ canvasContext: ctx, viewport: viewport }).promise;
-            images.push(canvas.toDataURL('image/jpeg', 0.9));
+            images.push(canvas.toDataURL('image/png'));
             if (i === 1) {
-              baseWidth = viewport.width;
-              baseHeight = viewport.height;
+              // Layout size stays independent of render resolution
+              var base = page.getViewport({ scale: 1 });
+              baseWidth = base.width;
+              baseHeight = base.height;
             }
           }
 
@@ -111,9 +116,9 @@
             height: baseHeight,
             size: 'stretch',
             minWidth: 280,
-            maxWidth: 900,
+            maxWidth: 1000,
             minHeight: 360,
-            maxHeight: 1100,
+            maxHeight: 1300,
             showCover: false,
             maxShadowOpacity: 0.4,
             mobileScrollSupport: false
